@@ -5,6 +5,7 @@ local TuneUtil = require(ReplicatedStorage.Modules.Shared.Vehicles.TuneUtil)
 
 local LocalPlayer = Players.LocalPlayer
 
+
 local Config = {
     Enabled = false, 
     TopSpeedBoost = 100,
@@ -14,6 +15,7 @@ local Config = {
 
 local activeTuneTables = {} 
 local originalData = {} 
+
 
 local oldGetTune = TuneUtil.getTune
 TuneUtil.getTune = function(vehicleId, customization)
@@ -84,11 +86,16 @@ local function ApplyChangesToActiveCars()
     end
 end
 
+
 local Window = Rayfield:CreateWindow({
     Name = "Driving Empire Tuner",
     LoadingTitle = "Loading Tunes...",
     LoadingSubtitle = "By Aoruen",
-    ConfigurationSaving = { Enabled = false }
+    ConfigurationSaving = {
+        Enabled = true,
+        FolderName = "DrivingEmpireTuner",
+        FileName = "Config"
+    }
 })
 
 local MainTab = Window:CreateTab("Tuning", 4483362458)
@@ -124,6 +131,7 @@ MainTab:CreateSlider({
     Callback = function(v) Config.GripMultiplier = v ApplyChangesToActiveCars() end
 })
 
+
 MainTab:CreateSection("Memory Management")
 MainTab:CreateButton({
     Name = "🗑️ Clear Cache & Reset All",
@@ -143,6 +151,7 @@ MainTab:CreateButton({
         Rayfield:Notify({Title = "Cache Cleared", Content = "Memory wiped.", Duration = 2})
     end
 })
+
 
 local function ApplyPreset(speed, accel, grip, name)
     Config.Enabled = true
