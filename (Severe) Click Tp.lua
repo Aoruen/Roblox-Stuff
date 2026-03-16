@@ -36,7 +36,7 @@ if _G.SevereClickTeleport == nil then
                 local char = player.Character
                 local root = char and char:FindFirstChild("HumanoidRootPart")
                 if root then
-                    root.CFrame = CFrame.new(camera.CFrame.Position + (dir * 70))
+                    root.CFrame = CFrame.new(camera.CFrame.Position + (dir * 50))
                     root.Velocity = Vector3.new(0, 0, 0)
                 end
                 task.wait(0.3)
